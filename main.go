@@ -14,6 +14,7 @@ func main() {
 
 	r.POST("/users", controllers.CreateUser)
 	r.PATCH("/users/:id", controllers.UpdateUser)
+	r.GET("/users/:id", controllers.FindUser)
 
 	r.Run()
 }
