@@ -1,4 +1,4 @@
-module example.com/hello
+module costmanagement
 
 go 1.16
 
