@@ -14,6 +14,13 @@ type CreateUserInput struct {
 	Password string `json:"password" binding:"required"`
 }
 
+type UpdateUserInput struct {
+	Name     string `json:"name" `
+	Email    string `json:"email" `
+	Phone    string `json:"phone" `
+	Password string `json:"password" `
+}
+
 //POST /users
 // create new user
 func CreateUser(c *gin.Context) {
@@ -34,13 +41,6 @@ func CreateUser(c *gin.Context) {
 	models.DB.Create(&user)
 
 	c.JSON(http.StatusOK, gin.H{"data": user})
-}
-
-type UpdateUserInput struct {
-	Name     string `json:"name" `
-	Email    string `json:"email" `
-	Phone    string `json:"phone" `
-	Password string `json:"password" `
 }
 
 //PATCH /users/:id
@@ -85,4 +85,18 @@ func FindUsers(c *gin.Context) {
 	models.DB.Find(&users)
 
 	c.JSON(http.StatusOK, gin.H{"data": users})
+}
+
+//DELETE users/:id
+// delete userby id
+func DeleteUser(c *gin.Context) {
+	//get model if exist
+	var user models.User
+	if err := models.DB.Where("id = ?", c.Param("id")).First(&user).Error; err != nil {
+		c.JSON(http.StatusNotFound, gin.H{"error": "Record not found!"})
+		return
+	}
+
+	models.DB.Delete(&user)
+	c.JSON(http.StatusOK, gin.H{"data": true})
 }
