@@ -77,3 +77,12 @@ func FindUser(c *gin.Context) {
 
 	c.JSON(http.StatusOK, gin.H{"data": user})
 }
+
+//GET /users
+//GET all users
+func FindUsers(c *gin.Context) {
+	var users []models.User
+	models.DB.Find(&users)
+
+	c.JSON(http.StatusOK, gin.H{"data": users})
+}
