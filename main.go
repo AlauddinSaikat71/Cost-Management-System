@@ -13,6 +13,7 @@ func main() {
 	models.ConnectDatabase()
 
 	r.POST("/users", controllers.CreateUser)
+	r.PATCH("/users/:id", controllers.UpdateUser)
 
 	r.Run()
 }
