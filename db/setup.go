@@ -1,6 +1,7 @@
-package models
+package db
 
 import (
+	"costmanagement/models"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/sqlite"
 )
@@ -13,6 +14,6 @@ func ConnectDatabase() {
 	if err != nil {
 		panic("Failed to connect to database")
 	}
-	database.AutoMigrate(&User{})
+	database.AutoMigrate(&models.User{})
 	DB = database
 }

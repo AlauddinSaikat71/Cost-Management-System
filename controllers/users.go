@@ -1,31 +1,19 @@
 package controllers
 
 import (
+	"costmanagement/db"
 	"costmanagement/models"
+	"costmanagement/models/dtos"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
 
-type CreateUserInput struct {
-	Name     string `json:"name" binding:"required"`
-	Email    string `json:"email" binding:"required"`
-	Phone    string `json:"phone" binding:"required"`
-	Password string `json:"password" binding:"required"`
-}
-
-type UpdateUserInput struct {
-	Name     string `json:"name" `
-	Email    string `json:"email" `
-	Phone    string `json:"phone" `
-	Password string `json:"password" `
-}
-
 //POST /users
 // create new user
 func CreateUser(c *gin.Context) {
 	//validate input
-	var input CreateUserInput
+	var input dtos.CreateUserInput
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusNotFound, gin.H{"error": err.Error()})
 		return
@@ -38,7 +26,7 @@ func CreateUser(c *gin.Context) {
 		Phone:    input.Phone,
 		Password: input.Password,
 	}
-	models.DB.Create(&user)
+	db.DB.Create(&user)
 
 	c.JSON(http.StatusOK, gin.H{"data": user})
 }
@@ -47,7 +35,7 @@ func CreateUser(c *gin.Context) {
 //Update  a user
 func UpdateUser(c *gin.Context) {
 	// Validate input
-	var input UpdateUserInput
+	var input dtos.UpdateUserInput
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
@@ -55,11 +43,11 @@ func UpdateUser(c *gin.Context) {
 
 	// Get model if exist
 	var user models.User
-	if err := models.DB.Where("id = ?", c.Param("id")).First(&user).Error; err != nil {
+	if err := db.DB.Where("id = ?", c.Param("id")).First(&user).Error; err != nil {
 		c.JSON(http.StatusNotFound, gin.H{"error": "Record not found!"})
 		return
 	}
-	models.DB.Model(&user).Updates(input)
+	db.DB.Model(&user).Updates(input)
 
 	c.JSON(http.StatusOK, gin.H{"data": user})
 }
@@ -70,7 +58,7 @@ func FindUser(c *gin.Context) {
 	//get model if exist
 	var user models.User
 
-	if err := models.DB.Where("id = ?", c.Param("id")).First(&user).Error; err != nil {
+	if err := db.DB.Where("id = ?", c.Param("id")).First(&user).Error; err != nil {
 		c.JSON(http.StatusNotFound, gin.H{"error": "Record not found"})
 		return
 	}
@@ -82,7 +70,7 @@ func FindUser(c *gin.Context) {
 //GET all users
 func FindUsers(c *gin.Context) {
 	var users []models.User
-	models.DB.Find(&users)
+	db.DB.Find(&users)
 
 	c.JSON(http.StatusOK, gin.H{"data": users})
 }
@@ -92,11 +80,11 @@ func FindUsers(c *gin.Context) {
 func DeleteUser(c *gin.Context) {
 	//get model if exist
 	var user models.User
-	if err := models.DB.Where("id = ?", c.Param("id")).First(&user).Error; err != nil {
+	if err := db.DB.Where("id = ?", c.Param("id")).First(&user).Error; err != nil {
 		c.JSON(http.StatusNotFound, gin.H{"error": "Record not found!"})
 		return
 	}
 
-	models.DB.Delete(&user)
+	db.DB.Delete(&user)
 	c.JSON(http.StatusOK, gin.H{"data": true})
 }

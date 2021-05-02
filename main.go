@@ -2,7 +2,7 @@ package main
 
 import (
 	"costmanagement/controllers"
-	"costmanagement/models"
+	"costmanagement/db"
 
 	"github.com/gin-gonic/gin"
 )
@@ -10,7 +10,7 @@ import (
 func main() {
 	r := gin.Default()
 
-	models.ConnectDatabase()
+	db.ConnectDatabase()
 
 	r.POST("/users", controllers.CreateUser)
 	r.PATCH("/users/:id", controllers.UpdateUser)
