@@ -11,6 +11,7 @@ func main() {
 	r := gin.Default()
 
 	db.ConnectDatabase()
+	db.InitModelDbContext()
 
 	r.POST("/users", controllers.CreateUser)
 	r.PATCH("/users/:id", controllers.UpdateUser)

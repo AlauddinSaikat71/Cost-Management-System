@@ -42,9 +42,7 @@ func UpdateUser(c *gin.Context) {
 
 	// Get model if exist
 	var user models.User
-	userDbContext := db.DB.Table("users")
-
-	if err := userDbContext.Where("id = ?", c.Param("id")).First(&user).Error; err != nil {
+	if err := db.UserDbContext.Where("id = ?", c.Param("id")).First(&user).Error; err != nil {
 		c.JSON(http.StatusNotFound, gin.H{"error": "Record not found!"})
 		return
 	}
@@ -58,9 +56,7 @@ func UpdateUser(c *gin.Context) {
 func FindUser(c *gin.Context) {
 	//get model if exist
 	var user models.User
-	userDbContext := db.DB.Table("users")
-
-	if err := userDbContext.Where("id = ?", c.Param("id")).First(&user).Error; err != nil {
+	if err := db.UserDbContext.Where("id = ?", c.Param("id")).First(&user).Error; err != nil {
 		c.JSON(http.StatusNotFound, gin.H{"error": "Record not found"})
 		return
 	}
@@ -82,9 +78,7 @@ func FindUsers(c *gin.Context) {
 func DeleteUser(c *gin.Context) {
 	//get model if exist
 	var user models.User
-	userDbContext := db.DB.Table("users")
-
-	if err := userDbContext.Where("id = ?", c.Param("id")).First(&user).Error; err != nil {
+	if err := db.UserDbContext.Where("id = ?", c.Param("id")).First(&user).Error; err != nil {
 		c.JSON(http.StatusNotFound, gin.H{"error": "Record not found!"})
 		return
 	}
