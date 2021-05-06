@@ -60,3 +60,110 @@ This model is used to see the relation between payment and attachments. We are a
 * CreatedBy : int (UserId)
 
 
+
+
+CRUD requests and responses
+
+POST
+
+endpoint : “/users”
+
+request : 
+		{
+			"name": "Saikat",
+    			"email": " saikat@gamil.com",
+    			"phone": "01744139232",
+    			"password": "123456"
+		}
+
+response : 
+       {
+			“data”: {
+				“id”: 1,
+				"name" : "Saikat",
+    				"email" : "saikat@gamil.com",
+    				"phone" : "01744139232",
+    				"password" : "123456"
+				“createdat”:“2021-05-06T15:54:17.6146253+06:00",				"updatedat":"2021-05-06T15:54:17.6146253+06:00"					
+       }
+		}
+
+
+
+GET
+endpoint : “/users”
+
+response : {
+			“data”:[]
+		 }
+
+
+
+
+
+
+
+
+GET
+
+endpoint : “/users/:id”
+
+response : {
+			“data”: {
+				“id”:1,
+				"name": "Saikat",
+    				"email": " saikat@gamil.com",
+    				"phone": "01744139232",
+    				"password": "123456"
+       "createdat":"2021-05-02T15:19:58.6942203+06:00",
+       "updatedat":"2021-05-02T15:20:23.2903907+06:00"
+       }
+		}
+
+
+
+
+
+PATCH
+
+endpoint : “/users/:id”
+
+request body : 
+		   {
+			"name": "Rafiul",
+                  "email": "rafiul@gamil.com"
+ 		   }
+
+response OK :
+ 
+       {
+			“data”: {
+				“id”:1,
+				"name": "Rafiul",
+                  	"email": "rafiul@gamil.com",
+       "phone": "01744139232",
+    				"password": "123456"
+       "createdat":"2021-05-02T15:19:58.6942203+06:00",
+       "updatedat":"2021-05-02T15:20:23.2903907+06:00"
+       }
+			}
+
+
+
+
+
+
+
+
+
+DELETE
+
+endpoint : “/users/:id”
+
+response OK :
+		
+			{
+    				"data": true
+       }
+	
+
