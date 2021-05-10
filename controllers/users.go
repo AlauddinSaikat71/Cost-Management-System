@@ -15,7 +15,7 @@ func CreateUser(c *gin.Context) {
 	//validate input
 	var input dtos.CreateUserInput
 	if err := c.ShouldBindJSON(&input); err != nil {
-		c.JSON(http.StatusNotFound, gin.H{"error": err.Error()})
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
@@ -27,7 +27,7 @@ func CreateUser(c *gin.Context) {
 		Password: input.Password,
 	}
 	db.DB.Create(&user)
-	c.JSON(http.StatusOK, gin.H{"data": user})
+	c.JSON(http.StatusCreated, gin.H{"data": user})
 }
 
 //PATCH /users/:id

@@ -31,7 +31,7 @@ func main() {
 	db.InitModelDbContext()
 
 	r.POST("/users", controllers.CreateUser)
-	r.PATCH("/users/:id", controllers.UpdateUser)
+	r.PUT("/users/:id", controllers.UpdateUser)
 	r.GET("/users/:id", controllers.FindUser)
 	r.GET("/users", controllers.FindUsers)
 	r.DELETE("/users/:id", controllers.DeleteUser)
