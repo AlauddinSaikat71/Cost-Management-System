@@ -3,6 +3,8 @@ package main
 import (
 	"costmanagement/controllers"
 	"costmanagement/db"
+	"costmanagement/filehandlers"
+	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
@@ -30,13 +32,19 @@ func main() {
 	db.ConnectDatabase()
 	db.InitModelDbContext()
 
+	// `/uploads` should be same as UPLOAD_DIR value
+	r.StaticFS("/uploads", http.Dir(filehandlers.UPLOAD_DIR))
+	filehandlers.Seed()
+
+	//routes for users
 	r.POST("/users", controllers.CreateUser)
 	r.PUT("/users/:id", controllers.UpdateUser)
 	r.GET("/users/:id", controllers.FindUser)
 	r.GET("/users", controllers.FindUsers)
 	r.DELETE("/users/:id", controllers.DeleteUser)
 
+	//routes for files
+	r.POST("/uploads", filehandlers.SaveFileHandler)
+
 	r.Run()
-	// listen and server the router with the port
-	//log.Fatal(r.Run(":3000"))
 }
