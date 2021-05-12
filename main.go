@@ -36,15 +36,18 @@ func main() {
 	r.StaticFS("/uploads", http.Dir(filehandlers.UPLOAD_DIR))
 	filehandlers.Seed()
 
-	//routes for users
+	//routes for Users
 	r.POST("/users", controllers.CreateUser)
 	r.PUT("/users/:id", controllers.UpdateUser)
 	r.GET("/users/:id", controllers.FindUser)
 	r.GET("/users", controllers.FindUsers)
 	r.DELETE("/users/:id", controllers.DeleteUser)
 
-	//routes for files
+	//routes for Files
 	r.POST("/uploads", filehandlers.SaveFileHandler)
+
+	//routes for Attachment
+	r.POST("/attachments", controllers.CreateAttachment)
 
 	r.Run()
 }
