@@ -38,7 +38,7 @@ func SaveFileHandler(c *gin.Context) {
 	extension := filepath.Ext(file.Filename)
 	// Generate random file name for the new uploaded file so it doesn't override the old file with same name
 	newFileName := uuid.New().String() + extension
-
+	filetype := file.Header.Get("Content-Type")
 	destination := path.Join(storingPath, newFileName)
 
 	// The file is received, so let's save it
@@ -51,7 +51,8 @@ func SaveFileHandler(c *gin.Context) {
 
 	// File saved successfully. Return proper result
 	c.JSON(http.StatusOK, gin.H{
-		"message": destination,
+		"destination": destination,
+		"type":        filetype,
 	})
 }
 
