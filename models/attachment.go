@@ -9,5 +9,5 @@ type Attachment struct {
 	FilePath  string
 	FileType  string
 	CreatedAt time.Time
-	CreatedBy []User `gorm:"ForeignKey:ID"`
+	CreatedBy int
 }
