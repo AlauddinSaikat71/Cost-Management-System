@@ -8,9 +8,9 @@ type Cost struct {
 	Description string
 	Amount      float32
 	Payment_Id  int
-	Payment     Payment  `gorm:"foreignKey:Payment_Id"`
-	CreatedAt   time.Time
-	CreatedBy 	int
+	Payment     Payment `gorm:"foreignKey:Payment_Id"`
+	CreatedAt   time.Time 
+	CreatedBy   int
 	UpdatedAt   time.Time
 	UpdatedBy   int
 }

@@ -6,7 +6,9 @@ import (
 )
 
 var UserDbContext *gorm.DB
+var CostDbContext *gorm.DB
 
 func InitModelDbContext() {
 	UserDbContext = DB.Table("users")
+	CostDbContext = DB.Table("costs")
 }
