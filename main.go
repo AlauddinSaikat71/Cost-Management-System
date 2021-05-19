@@ -49,5 +49,8 @@ func main() {
 	//routes for Attachment
 	r.POST("/attachments", controllers.CreateAttachment)
 
+	//routes for Cost
+	r.POST("/costs", controllers.CreateCost)
+
 	r.Run()
 }

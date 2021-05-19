@@ -17,5 +17,6 @@ func ConnectDatabase() {
 	}
 	database.AutoMigrate(&models.User{})
 	database.AutoMigrate(&models.Attachment{})
+	database.AutoMigrate(&models.Cost{})
 	DB = database
 }
