@@ -190,3 +190,208 @@ response:
   	"data": true
 }
 ```
+
+
+
+
+
+POST  `/uploads`
+
+request body :
+
+`key: file     value:image.png`
+
+response:
+
+```json
+{
+	"destination": "uploads/2021/05/19/27c7496b-5260-4afe-ba53-			            08a83117a8a2.PNG",
+    "type": "image/png"
+}
+```
+
+
+
+
+
+POST  `/attachments`
+
+request body:
+
+```json
+{  
+	"filepath" : "dvudvud/cieji",
+    "filetype" : "image/jpg"
+}`
+```
+
+response :
+
+```json
+  "data": {
+    "ID": 1,
+    "FilePath": "dvudvud/cieji",
+    "FileType": "image/jpg",
+    "CreatedAt": "2021-05-19T21:58:57.8858983+06:00",
+    "CreatedBy": 0
+  }
+}
+```
+
+
+
+
+
+
+
+POST `/costs`
+
+request body:
+
+```json
+{
+    "title":"saikat",
+    "description" : "no",
+    "amount": 600,
+    "payment_id":5
+}
+```
+
+response :
+
+```json
+  "data": {
+    "ID": 1,
+    "Title": "saikat",
+    "Description": "no",
+    "Amount": 600,
+    "Payment_Id": 5,
+    "Payment": {
+      "ID": 0,
+      "Method": "",
+      "Amount": 0,
+      "CreatedAt": "0001-01-01T00:00:00Z",
+      "CreatedBy": 0,
+      "PaidBy": 0,
+      "Meta": ""
+    },
+    "CreatedAt": "2021-05-19T22:07:42.779+06:00",
+    "CreatedBy": 0,
+    "UpdatedAt": "2021-05-19T22:07:42.779+06:00",
+    "UpdatedBy": 0
+  }
+}
+```
+
+
+
+GET `/costs/2021-05-01/2021-05-25`
+
+response:
+
+``` json
+{
+  "data": [
+      {
+      "ID": 1,
+      "Title": "dufduhf",
+      "Description": "suhu",
+      "Amount": 4000,
+      "Payment_Id": 5,
+      "Payment": {
+        "ID": 0,
+        "Method": "",
+        "Amount": 0,
+        "CreatedAt": "0001-01-01T00:00:00Z",
+        "CreatedBy": 0,
+        "PaidBy": 0,
+        "Meta": ""
+      },
+      "CreatedAt": "2021-05-19T15:06:52.532947+06:00",
+      "CreatedBy": 0,
+      "UpdatedAt": "2021-05-19T15:06:52.532947+06:00",
+      "UpdatedBy": 0
+    },
+    {
+      "ID": 2,
+      "Title": "dufduhf",
+      "Description": "suhu",
+      "Amount": 203,
+      "Payment_Id": 5,
+      "Payment": {
+        "ID": 0,
+        "Method": "",
+        "Amount": 0,
+        "CreatedAt": "0001-01-01T00:00:00Z",
+        "CreatedBy": 0,
+        "PaidBy": 0,
+        "Meta": ""
+      },
+      "CreatedAt": "2021-05-19T15:07:09.2208497+06:00",
+      "CreatedBy": 0,
+      "UpdatedAt": "2021-05-19T15:07:09.2208497+06:00",
+      "UpdatedBy": 0
+    }
+   ]
+}
+```
+
+
+
+
+
+
+
+POST `/costattachments`
+
+request body:
+
+```json
+{
+    "costid" :5,
+    "attachmentid":5,
+    "createdby": 5
+}
+```
+
+response :
+
+``` json
+{
+  "data": {
+    "ID": 1,
+    "CostId": 5,
+    "Cost": {
+      "ID": 0,
+      "Title": "",
+      "Description": "",
+      "Amount": 0,
+      "Payment_Id": 0,
+      "Payment": {
+        "ID": 0,
+        "Method": "",
+        "Amount": 0,
+        "CreatedAt": "0001-01-01T00:00:00Z",
+        "CreatedBy": 0,
+        "PaidBy": 0,
+        "Meta": ""
+      },
+      "CreatedAt": "0001-01-01T00:00:00Z",
+      "CreatedBy": 0,
+      "UpdatedAt": "0001-01-01T00:00:00Z",
+      "UpdatedBy": 0
+    },
+    "AttachmentId": 5,
+    "Attachment": {
+      "ID": 0,
+      "FilePath": "",
+      "FileType": "",
+      "CreatedAt": "0001-01-01T00:00:00Z",
+      "CreatedBy": 0
+    },
+    "CreatedAt": "2021-05-19T22:15:50.7998754+06:00",
+    "CreatedBy": 5
+  }
+}
+```
+
