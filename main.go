@@ -52,6 +52,8 @@ func main() {
 	//routes for Cost
 	r.POST("/costs", controllers.CreateCost)
 	r.GET("/costs/:from/:to", controllers.FindCosts)
+	r.PATCH("/costs/:id", controllers.UpdateCost)
+	r.DELETE("/costs/:id", controllers.DeleteCost)
 
 	//routes for CostAttachment
 	r.POST("/costattachments", controllers.CreateCostAttachment)
