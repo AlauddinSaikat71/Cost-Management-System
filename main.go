@@ -27,7 +27,7 @@ func CORSMiddleware() gin.HandlerFunc {
 
 func main() {
 	r := gin.Default()
-	CORSMiddleware()
+	r.Use(CORSMiddleware())
 
 	db.ConnectDatabase()
 	db.InitModelDbContext()

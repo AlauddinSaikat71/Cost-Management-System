@@ -21,12 +21,16 @@ func CreateCost(c *gin.Context) {
 		return
 	}
 
+	now, _ := time.Parse("2006-01-02", time.Now().Format("2006-01-02"))
+	log.Println(now)
+
 	//create cost
 	cost := models.Cost{
 		Title:       input.Title,
 		Description: input.Description,
 		Amount:      input.Amount,
 		Payment_Id:  input.Payment_Id,
+		CreatedAt:   now,
 	}
 	db.DB.Create(&cost)
 	c.JSON(http.StatusCreated, gin.H{"data": cost})
@@ -36,10 +40,8 @@ func CreateCost(c *gin.Context) {
 // find costs between from-date and to-date
 func FindCosts(c *gin.Context) {
 	fromDateString := c.Param("from")
-	//fmt.Printf(fromDateString)
 	toDateString := c.Param("to")
-	//fmt.Printf(toDateString)
-
+  
 	// parsing date object from string
 	fromDate, err := time.Parse("2006-01-02", fromDateString)
 	if err != nil {
