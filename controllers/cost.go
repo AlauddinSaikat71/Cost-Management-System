@@ -5,6 +5,7 @@ import (
 	"costmanagement/models"
 	"costmanagement/models/dtos"
 	"fmt"
+	"log"
 	"net/http"
 	"time"
 
@@ -21,12 +22,16 @@ func CreateCost(c *gin.Context) {
 		return
 	}
 
+	now, _ := time.Parse("2006-01-02", time.Now().Format("2006-01-02"))
+	log.Println(now)
+
 	//create cost
 	cost := models.Cost{
 		Title:       input.Title,
 		Description: input.Description,
 		Amount:      input.Amount,
 		Payment_Id:  input.Payment_Id,
+		CreatedAt:   now,
 	}
 	db.DB.Create(&cost)
 	c.JSON(http.StatusCreated, gin.H{"data": cost})
