@@ -395,3 +395,57 @@ response :
 }
 ```
 
+
+
+PATCH `/costs/:id`
+
+request body :
+
+```json
+{
+    "title":"dufduhf",
+    "description" : "suhu",
+    "amount": 500.5555,
+    "payment_id":5
+}
+```
+
+response :
+
+```json
+{
+  "data": {
+    "ID": 8,
+    "Title": "dufduhf",
+    "Description": "suhu",
+    "Amount": 500.5555,
+    "Payment_Id": 5,
+    "Payment": {
+      "ID": 0,
+      "Method": "",
+      "Amount": 0,
+      "CreatedAt": "0001-01-01T00:00:00Z",
+      "CreatedBy": 0,
+      "PaidBy": 0,
+      "Meta": ""
+    },
+    "CreatedAt": "2021-05-19T22:07:42.779+06:00",
+    "CreatedBy": 0,
+    "UpdatedAt": "2021-05-22T00:53:51.4793073+06:00",
+    "UpdatedBy": 0
+  }
+}
+```
+
+
+
+DELETE `/costs/:id`
+
+response:
+
+```json
+{
+  "data": true
+}
+```
+
