@@ -285,7 +285,7 @@ response :
 
 
 
-GET `/costs/2021-05-01/2021-05-25`
+GET `/costs?from=2021-05-20&to=2021-05-22`
 
 response:
 
@@ -335,6 +335,41 @@ response:
    ]
 }
 ```
+
+
+
+
+
+GET `/costs/:id`
+
+response :
+
+```json
+{
+  "data": {
+    "ID": 1,
+    "Title": "dufduhf",
+    "Description": "suhu",
+    "Amount": 500,
+    "Payment_Id": 5,
+    "Payment": {
+      "ID": 0,
+      "Method": "",
+      "Amount": 0,
+      "CreatedAt": "0001-01-01T00:00:00Z",
+      "CreatedBy": 0,
+      "PaidBy": 0,
+      "Meta": ""
+    },
+    "CreatedAt": "2021-05-19T20:22:58.9666021+06:00",
+    "CreatedBy": 0,
+    "UpdatedAt": "2021-05-19T20:22:58.9666021+06:00",
+    "UpdatedBy": 0
+  }
+}
+```
+
+
 
 
 
