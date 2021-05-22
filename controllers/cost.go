@@ -21,16 +21,16 @@ func CreateCost(c *gin.Context) {
 		return
 	}
 
-	now, _ := time.Parse("2006-01-02", time.Now().Format("2006-01-02"))
-	log.Println(now)
+	date, _ := time.Parse("2006-01-02", input.Date.Format("2006-01-02"))
+	log.Println(date)
 
 	//create cost
 	cost := models.Cost{
 		Title:       input.Title,
 		Description: input.Description,
 		Amount:      input.Amount,
+		Date:        date,
 		Payment_Id:  input.Payment_Id,
-		CreatedAt:   now,
 	}
 	db.DB.Create(&cost)
 	c.JSON(http.StatusCreated, gin.H{"data": cost})
@@ -59,7 +59,7 @@ func FindCosts(c *gin.Context) {
 
 	// query in costs table according to date
 	var costs []models.Cost
-	if err := db.CostDbContext.Where("created_at>=? AND created_at<=?", fromDate, toDate).Find(&costs).Error; err != nil {
+	if err := db.CostDbContext.Where("date>=? AND date<=?", fromDate, toDate).Find(&costs).Error; err != nil {
 		c.JSON(http.StatusNotFound, gin.H{"error": "Record not found"})
 		return
 	}

@@ -53,11 +53,18 @@ func main() {
 	r.POST("/costs", controllers.CreateCost)
 	r.GET("/costs/:id", controllers.FindCost)
 	r.GET("/costs", controllers.FindCosts)
-	r.PATCH("/costs/:id", controllers.UpdateCost)
+	r.PUT("/costs/:id", controllers.UpdateCost)
 	r.DELETE("/costs/:id", controllers.DeleteCost)
 
 	//routes for CostAttachment
 	r.POST("/costattachments", controllers.CreateCostAttachment)
+
+	//routes for Payment
+	r.POST("/payments", controllers.CreatePayment)
+	r.GET("/payments", controllers.FindPayments)
+	r.GET("/payments/:id", controllers.FindPayment)
+	r.PUT("/payments/:id", controllers.UpdatePayment)
+	r.DELETE("/payments/:id", controllers.DeletePayment)
 
 	r.Run()
 }
