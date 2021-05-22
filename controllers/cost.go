@@ -39,20 +39,22 @@ func CreateCost(c *gin.Context) {
 //GET /costs
 // find costs between from-date and to-date
 func FindCosts(c *gin.Context) {
-	//fromDateString := c.Param("from")
-	//toDateString := c.Param("to")
-	//query
+	//get string from url query
 	fromDateString := c.Request.URL.Query().Get("from")
 	toDateString := c.Request.URL.Query().Get("to")
 
 	// parsing date object from string
 	fromDate, err := time.Parse("2006-01-02", fromDateString)
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Parsing fromDateString failed"})
+		return
 	}
 	toDate, err := time.Parse("2006-01-02", toDateString)
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Parsing toDateString failed"})
+		return
 	}
 
 	// query in costs table according to date
