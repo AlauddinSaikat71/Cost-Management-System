@@ -18,6 +18,7 @@ This model is used to transfer a Cost object from client to server and validate 
 * Title : string
 * Description : string
 * Amount : float/double
+* Date : Date-Time
 * Payment_Id : int
 * Payment : PaymentDTO
 * CreatedAt : Date-Time
@@ -253,6 +254,7 @@ request body:
     "title":"saikat",
     "description" : "no",
     "amount": 600,
+    "date":"2020-05-22T18:22:00Z"
     "payment_id":5
 }
 ```
@@ -265,6 +267,7 @@ response :
     "Title": "saikat",
     "Description": "no",
     "Amount": 600,
+    "Date": "2020-05-22T00:00:00Z",
     "Payment_Id": 5,
     "Payment": {
       "ID": 0,
