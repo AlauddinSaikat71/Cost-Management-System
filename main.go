@@ -51,7 +51,8 @@ func main() {
 
 	//routes for Cost
 	r.POST("/costs", controllers.CreateCost)
-	r.GET("/costs/:from/:to", controllers.FindCosts)
+	r.GET("/costs/:id", controllers.FindCost)
+	r.GET("/costs", controllers.FindCosts)
 	r.PATCH("/costs/:id", controllers.UpdateCost)
 	r.DELETE("/costs/:id", controllers.DeleteCost)
 

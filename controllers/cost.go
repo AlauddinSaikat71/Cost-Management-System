@@ -39,17 +39,22 @@ func CreateCost(c *gin.Context) {
 //GET /costs
 // find costs between from-date and to-date
 func FindCosts(c *gin.Context) {
-	fromDateString := c.Param("from")
-	toDateString := c.Param("to")
-  
+	//get string from url query
+	fromDateString := c.Request.URL.Query().Get("from")
+	toDateString := c.Request.URL.Query().Get("to")
+
 	// parsing date object from string
 	fromDate, err := time.Parse("2006-01-02", fromDateString)
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Parsing fromDateString failed"})
+		return
 	}
 	toDate, err := time.Parse("2006-01-02", toDateString)
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Parsing toDateString failed"})
+		return
 	}
 
 	// query in costs table according to date
@@ -60,6 +65,19 @@ func FindCosts(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, gin.H{"data": costs})
+}
+
+//GET /costs/:id
+//get cost by id
+func FindCost(c *gin.Context) {
+	//get model if exist
+	var cost models.Cost
+	if err := db.CostDbContext.Where("id = ?", c.Param("id")).First(&cost).Error; err != nil {
+		c.JSON(http.StatusNotFound, gin.H{"error": "Record not found"})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"data": cost})
 }
 
 //PATCH /costs/:id
