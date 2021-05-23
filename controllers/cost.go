@@ -21,8 +21,10 @@ func CreateCost(c *gin.Context) {
 		return
 	}
 
-	date, _ := time.Parse("2006-01-02", input.Date.Format("2006-01-02"))
-	log.Println(date)
+	date, dateParsingErr := time.Parse("2006-01-02", input.Date)
+	if dateParsingErr != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": dateParsingErr.Error()})
+	}
 
 	//create cost
 	cost := models.Cost{
