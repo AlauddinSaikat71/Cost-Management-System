@@ -18,6 +18,7 @@ This model is used to transfer a Cost object from client to server and validate 
 * Title : string
 * Description : string
 * Amount : float/double
+* Date : Date-Time
 * Payment_Id : int
 * Payment : PaymentDTO
 * CreatedAt : Date-Time
@@ -152,7 +153,7 @@ response :
 
 
 
-PATCH `/users/:id`
+PUT    `/users/:id`
 
 request body :
 
@@ -253,6 +254,7 @@ request body:
     "title":"saikat",
     "description" : "no",
     "amount": 600,
+    "date":"2020-05-22T18:22:00Z"
     "payment_id":5
 }
 ```
@@ -265,6 +267,7 @@ response :
     "Title": "saikat",
     "Description": "no",
     "Amount": 600,
+    "Date": "2020-05-22T00:00:00Z",
     "Payment_Id": 5,
     "Payment": {
       "ID": 0,
@@ -285,7 +288,7 @@ response :
 
 
 
-GET `/costs/2021-05-01/2021-05-25`
+GET `/costs?from=2021-05-20&to=2021-05-22`
 
 response:
 
@@ -339,6 +342,89 @@ response:
 
 
 
+
+GET `/costs/:id`
+
+response :
+
+```json
+{
+  "data": {
+    "ID": 1,
+    "Title": "dufduhf",
+    "Description": "suhu",
+    "Amount": 500,
+    "Payment_Id": 5,
+    "Payment": {
+      "ID": 0,
+      "Method": "",
+      "Amount": 0,
+      "CreatedAt": "0001-01-01T00:00:00Z",
+      "CreatedBy": 0,
+      "PaidBy": 0,
+      "Meta": ""
+    },
+    "CreatedAt": "2021-05-19T20:22:58.9666021+06:00",
+    "CreatedBy": 0,
+    "UpdatedAt": "2021-05-19T20:22:58.9666021+06:00",
+    "UpdatedBy": 0
+  }
+}
+```
+
+
+
+PUT   `/costs/:id`
+
+request body :
+
+```json
+{
+    "title":"dufduhf",
+    "description" : "suhu",
+    "amount": 500.5555,
+    "payment_id":5
+}
+```
+
+response :
+
+```json
+{
+  "data": {
+    "ID": 8,
+    "Title": "dufduhf",
+    "Description": "suhu",
+    "Amount": 500.5555,
+    "Payment_Id": 5,
+    "Payment": {
+      "ID": 0,
+      "Method": "",
+      "Amount": 0,
+      "CreatedAt": "0001-01-01T00:00:00Z",
+      "CreatedBy": 0,
+      "PaidBy": 0,
+      "Meta": ""
+    },
+    "CreatedAt": "2021-05-19T22:07:42.779+06:00",
+    "CreatedBy": 0,
+    "UpdatedAt": "2021-05-22T00:53:51.4793073+06:00",
+    "UpdatedBy": 0
+  }
+}
+```
+
+
+
+DELETE `/costs/:id`
+
+response:
+
+```json
+{
+  "data": true
+}
+```
 
 
 
@@ -394,4 +480,131 @@ response :
   }
 }
 ```
+
+
+
+
+
+
+
+
+
+POST   `/payments`
+
+request body:
+
+```json
+{
+    "method":"bKash",
+    "amount" : 9000.00,
+    "createdby":2,
+    "paidby":3
+}
+```
+
+response :
+
+```json
+{
+  "data": {
+    "ID": 1,
+    "Method": "bKash",
+    "Amount": 9000,
+    "CreatedAt": "2021-05-22T22:08:27.4257175+06:00",
+    "CreatedBy": 2,
+    "PaidBy": 3,
+    "Meta": ""
+  }
+}
+```
+
+GET    `/payments`
+
+response :
+
+```json
+{
+  "data": [
+    {
+      "ID": 1,
+      "Method": "bKash",
+      "Amount": 5000,
+      "CreatedAt": "2021-05-22T21:53:19.426631+06:00",
+      "CreatedBy": 2,
+      "PaidBy": 3,
+      "Meta": "uuefue"
+    },
+    {
+      "ID": 3,
+      "Method": "rocket",
+      "Amount": 6000,
+      "CreatedAt": "2021-05-22T21:53:30.9642308+06:00",
+      "CreatedBy": 2,
+      "PaidBy": 3,
+      "Meta": ""
+    }
+  ]
+}
+```
+
+GET `/payments/:id`
+
+response :
+
+```json
+{
+  "data": {
+    "ID": 1,
+    "Method": "bKash",
+    "Amount": 5000,
+    "CreatedAt": "2021-05-22T21:53:19.426631+06:00",
+    "CreatedBy": 2,
+    "PaidBy": 3,
+    "Meta": "uuefue"
+  }
+}
+```
+
+PUT `/payments/:id`
+
+request body:
+
+```json
+{
+    "method":"rocket",
+    "amount" : 6000.00,
+    "createdby":2,
+    "paidby":3
+}
+```
+
+response :
+
+```json
+{
+  "data": {
+    "ID": 1,
+    "Method": "rocket",
+    "Amount": 6000,
+    "CreatedAt": "2021-05-22T21:53:19.426631+06:00",
+    "CreatedBy": 2,
+    "PaidBy": 3,
+    "Meta": "uuefue"
+  }
+}
+```
+
+DELETE `/payments/:id`
+
+response :
+
+```json
+{
+  "data": true
+}
+```
+
+
+
+
 
