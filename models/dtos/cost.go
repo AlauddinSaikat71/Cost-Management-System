@@ -13,4 +13,5 @@ type UpdateCostInput struct {
 	Description string  `json:"description"`
 	Amount      float32 `json:"amount" binding:"required"`
 	Payment_Id  int     `json:"payment_id"`
+	Date        string  `json:"date" binding:"required"`
 }

@@ -92,6 +92,11 @@ func UpdateCost(c *gin.Context) {
 		return
 	}
 
+	date, dateParsingErr := time.Parse("2006-01-02", input.Date)
+	if dateParsingErr != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": dateParsingErr.Error()})
+	}
+
 	// Get model if exist
 	var cost models.Cost
 	if err := db.CostDbContext.Where("id = ?", c.Param("id")).First(&cost).Error; err != nil {
@@ -99,7 +104,14 @@ func UpdateCost(c *gin.Context) {
 		return
 	}
 
-	db.DB.Model(&cost).Updates(input)
+	cost.Title = input.Title
+	cost.Description = input.Description
+	cost.Amount = input.Amount
+	cost.Date = date
+	cost.Payment_Id = input.Payment_Id
+	cost.UpdatedAt = time.Now()
+
+	db.DB.Model(&cost).Updates(cost)
 	c.JSON(http.StatusOK, gin.H{"data": cost})
 }
 
