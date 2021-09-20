@@ -254,8 +254,9 @@ request body:
     "title":"saikat",
     "description" : "no",
     "amount": 600,
-    "date":"2020-05-22T18:22:00Z"
-    "payment_id":5
+    "date":"2020-05-22T18:22:00Z",
+    "payment_id":5,
+    "created_by": 10
 }
 ```
 

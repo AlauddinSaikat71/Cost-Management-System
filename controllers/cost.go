@@ -33,6 +33,7 @@ func CreateCost(c *gin.Context) {
 		Amount:      input.Amount,
 		Date:        date,
 		Payment_Id:  input.Payment_Id,
+		CreatedBy :  input.Created_by,
 	}
 	db.DB.Create(&cost)
 	c.JSON(http.StatusCreated, gin.H{"data": cost})
@@ -69,6 +70,19 @@ func FindCosts(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": costs})
 }
 
+//GET /costsByUser
+//get all costs by user id
+func FindCostsByUser(c *gin.Context){
+	
+	var costs []models.Cost
+	if err := db.DB.Joins("JOIN costs on costs.created_by = users.id").Where("users.id = ?", c.Param("x")).Find(&costs).Error; err!=nil{
+		c.JSON(http.StatusNotFound, gin.H{"error": "Record not found"})
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{"data": costs})
+}
+
+
 //GET /costs/:id
 //get cost by id
 func FindCost(c *gin.Context) {
@@ -81,6 +95,7 @@ func FindCost(c *gin.Context) {
 
 	c.JSON(http.StatusOK, gin.H{"data": cost})
 }
+
 
 //PATCH /costs/:id
 //Update  a cost
