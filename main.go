@@ -53,8 +53,10 @@ func main() {
 	r.POST("/costs", controllers.CreateCost)
 	r.GET("/costs/:id", controllers.FindCost)
 	r.GET("/costs", controllers.FindCosts)
+	r.GET("/costsByUser/:x",controllers.FindCostsByUser);
 	r.PUT("/costs/:id", controllers.UpdateCost)
 	r.DELETE("/costs/:id", controllers.DeleteCost)
+
 
 	//routes for CostAttachment
 	r.POST("/costattachments", controllers.CreateCostAttachment)

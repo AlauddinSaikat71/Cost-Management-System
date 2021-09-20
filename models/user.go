@@ -10,4 +10,5 @@ type User struct {
 	Password  string    `json:"password"`
 	CreatedAt time.Time `json:"createdat"`
 	UpdatedAt time.Time `json:"updatedat"`
+	//Costs []Cost `gorm:"many2many:user_costs"`
 }

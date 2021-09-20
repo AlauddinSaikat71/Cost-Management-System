@@ -11,7 +11,7 @@ type Cost struct {
 	Payment_Id  int
 	Payment     Payment `gorm:"foreignKey:Payment_Id"`
 	CreatedAt   time.Time
-	CreatedBy   int
+	CreatedBy   int `gorm:"foreignKey:CreatedBy"`
 	UpdatedAt   time.Time
 	UpdatedBy   int
 }
